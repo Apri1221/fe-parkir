@@ -3,7 +3,7 @@
     <LoginModal />
     <div class="container px-5 py-12 mx-auto flex flex-wrap items-center">
       <div class="lg:w-3/5 md:w-1/2 md:pr-16 lg:pr-0 pr-0">
-        <nuxt-img src="/tfd-logo.png" class="w-20 mx-auto mb-12" />
+        <img src="/tfd-logo.webp" class="w-20 mx-auto mb-12" />
         <p
           class="
             max-w-3xl

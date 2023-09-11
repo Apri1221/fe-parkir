@@ -1,9 +1,10 @@
 export default () => ({
-  users: [],
-  newUser: {
+  newTransaction: {
     name: "",
     email: "",
     password: "",
     confirmPassword: "",
   },
+  transactions: null,
+
 });

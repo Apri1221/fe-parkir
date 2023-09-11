@@ -1,9 +1,10 @@
 export default () => ({
-  users: [],
-  newUser: {
+  newCategory: {
     name: "",
     email: "",
     password: "",
     confirmPassword: "",
   },
+  categories: null,
+
 });

@@ -10,7 +10,6 @@ export default {
   CLEAR_USER_FORM(state) {
     state.newUser = {
       name: "",
-      username: "",
       email: "",
       password: "",
       confirmPassword: "",

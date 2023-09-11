@@ -6,13 +6,15 @@
         <NavBarHome></NavBarHome>
         <nuxt></nuxt>
       </div>
+      <Toast />
     </div>
   </main>
 </template>
 <script>
 import NavBarHome from "../components/NavBar/nav-bar-home";
 import SideBar from "../components/SideBar/side-bar";
+import Toast from "~/components/notifications/toasts";
 export default {
-  components: { SideBar, NavBarHome },
+  components: { SideBar, NavBarHome, Toast },
 };
 </script>

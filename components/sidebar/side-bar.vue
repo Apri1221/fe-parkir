@@ -44,7 +44,7 @@
               </svg>
             </span>
           </SideBarItem>
-          <SideBarItem name="Store" link="/store">
+          <SideBarItem name="Report" link="/report">
             <span class="text-left">
               <svg
                 fill="currentColor"
@@ -110,6 +110,7 @@ export default {
     async logout() {
       window.localStorage.clear();
       await this.$auth.logout();
+      await this.$router.refresh();
     },
   },
 };

@@ -3,14 +3,23 @@ export const getters = {
     return state.auth.loggedIn;
   },
   loggedInUser(state) {
-    return state.auth.user;
+    return state.auth.user.data;
   },
+  stateCategories(state) {
+    console.log(state)
+    return state.categories.categories;
+  },
+  stateUsers(state) {
+    return state.users.users;
+  },
+  stateTransactions(state) {
+    return state.transactions.transactions;
+  }
 };
 export const mutations = {
   UPDATE_LOGGED_USER(state, user) {
     if (user.id === state.auth.user.id) {
       state.auth.user.name = user.name;
-      state.auth.user.username = user.username;
       state.auth.user.email = user.email;
     }
   },

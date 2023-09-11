@@ -3,11 +3,11 @@
     <t-modal :click-to-close="true" :hide-close-button="true" name="new-user">
       <div class="container w-full mx-auto py-6 md:w-4/5 w-11/12 px-6">
         <div>
-          <nuxt-img
+          <img
             alt="profil"
             :src="
               'https://avatars.dicebear.com/api/male/' +
-              username +
+              name +
               '.svg?background=%230000ff'
             "
             class="mx-auto object-cover rounded-full h-20 w-20"
@@ -17,15 +17,6 @@
           </h2>
         </div>
         <form class="mt-16" method="post" @submit.prevent="submit">
-          <t-input
-            v-model="username"
-            classes="mt-4 border-gray-300 placeholder-gray-400 rounded-md"
-            :required="true"
-            placeholder="Username"
-            name="username"
-            autocomplete="off"
-            type="text"
-          />
           <t-input
             v-model="name"
             classes="mt-4 border-gray-300 placeholder-gray-400 rounded-md"
@@ -62,11 +53,11 @@
             autocomplete="off"
             type="text"
           />
-          <t-button
-            type="submit"
-            classes="mt-16 w-full bg-green-400 text-white font-semibold text-sm uppercase rounded-md"
-            >Submit</t-button
-          >
+          <div class="mt-10 w-full flex justify-center text-white font-semibold text-sm uppercase rounded-md">
+            <button type="submit">
+              <ShadowButton text="submit" color="bg-green-700" />
+            </button>
+          </div>
         </form>
       </div>
     </t-modal>
@@ -75,12 +66,14 @@
 <script>
 import { createHelpers } from "vuex-map-fields";
 import { mapActions, mapMutations } from "vuex";
+import ShadowButton from "~/components/button/shadow-button";
 const { mapFields } = createHelpers({
   getterType: "users/getField",
   mutationType: "users/updateField",
 });
 export default {
   name: "NewUser",
+  components: { ShadowButton },
   data() {
     return {
       errorMsg: "",
@@ -91,7 +84,6 @@ export default {
   computed: {
     ...mapFields({
       name: "newUser.name",
-      username: "newUser.username",
       email: "newUser.email",
       password: "newUser.password",
       confirmPassword: "newUser.confirmPassword",

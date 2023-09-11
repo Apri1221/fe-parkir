@@ -86,9 +86,8 @@ export default {
       this.$modal.hide("change-password");
     },
     async changePassword() {
-      const username = this.$store.$auth.user.username;
+      // const username = this.$store.$auth.user.username;
       const data = {
-        username: username,
         currentPassword: this.currentPassword,
         newPassword: this.newPassword,
         confirmPassword: this.confirmPassword,
@@ -101,7 +100,7 @@ export default {
         // Clear data from form
         this.clear();
         this.isSuccess = true;
-        this.errorMsg = response.username;
+        this.errorMsg = response.name;
       } catch (error) {
         this.ifError = true;
         if (Array.isArray(error.response.data.message)) {

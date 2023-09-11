@@ -1,10 +1,11 @@
 import createSitemapRoutes from "./utils/createSitemap";
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
+  // ssr: false, // must, for vt-notification.js
   head: {
-    title: "TFD Nuxt Tailwind Boilerplate",
+    title: "Parking System",
     htmlAttrs: {
-      lang: "kh",
+      lang: "id",
     },
     meta: [
       { charset: "utf-8" },
@@ -21,10 +22,10 @@ export default {
       },
     ],
   },
-  target: "server",
+  mode: 'universal',
   manifest: {
-    name: "TFD Nuxt Frontend",
-    short_name: "TFD Nuxt",
+    name: "Parkir Nuxt Frontend",
+    short_name: "Parkir Nuxt",
     description: "Boilerplate for NuxtJs with Tailwind",
     theme_color: "#2C3E50",
     start_url: "/",
@@ -34,13 +35,17 @@ export default {
   css: ["@/assets/css/main.css", "@/assets/css/tailwind.css"],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [{ src: "~/plugins/tailwind-components.js" }],
+  plugins: [
+    { src: "~/plugins/tailwind-components.js" },
+    { src: "~/plugins/vt-notifications.js" },
+  ],
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/tailwindcss
     "@nuxtjs/tailwindcss",
     "@nuxtjs/moment",
+    "@nuxtjs/router",
   ],
   moment: {
     defaultTimezone: "Asia/Phnom_Penh",
@@ -51,23 +56,12 @@ export default {
     "@nuxtjs/axios",
     "@nuxtjs/auth-next",
     "@nuxt/image",
-    "@nuxtjs/toast",
   ],
+  image: { domains: ["https://demo.dindingdigital.com"] },
   // Nuxt Axios
   axios: {
-    proxy:
-      process.env.NODE_ENV === "production"
-        ? false
-        : process.env.NODE_ENV !== "staging",
-    baseURL: process.env.BASE_URL || "http://localhost:80",
-    // proxyHeaders: false,
+    baseURL: "https://parkir.dindingdigital.com/api",
     // credentials: false
-  },
-  proxy: {
-    "/api/v1/": {
-      target: "http://localhost:80/api/v1",
-      pathRewrite: { "^/api/v1/": "" },
-    },
   },
   // Nuxt Auth Plugin
   auth: {
@@ -77,18 +71,18 @@ export default {
     strategies: {
       local: {
         token: {
-          property: "accessToken",
+          property: "token",
+          global: true,
           required: true,
-          type: "bearer",
         },
         user: {
-          property: "false",
+          property: "",
           autoFetch: false,
         },
         endpoints: {
-          login: { url: "api/v1/auth/login", method: "post" },
-          user: { url: "api/v1/auth/me", method: "get" },
-          logout: false,
+          login: { url: "login", method: "post" },
+          user: { url: "me", method: "get" },
+          logout: { url: "logout", method: "get" },
         },
       },
     },
@@ -109,22 +103,22 @@ export default {
         moment: "en",
       },
       {
-        code: "kh",
-        iso: "kh-KH",
-        file: "kh-KH.json",
+        code: "id",
+        iso: "id-ID",
+        file: "id-ID.json",
         dir: "ltr",
-        moment: "kh",
+        moment: "id",
       },
     ],
-    defaultLocale: "kh",
+    defaultLocale: "id",
     lazy: true,
     langDir: "locales/",
     noPrefixDefaultLocale: true,
     vueI18n: {
-      fallbackLocale: "kh",
+      fallbackLocale: "id",
       messages: {
         "en-US": require("./locales/en-US"),
-        "kh-KH": require("./locales/kh-KH"),
+        "id-ID": require("./locales/id-ID"),
       },
     },
   },
@@ -135,7 +129,10 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    transpile: ["epic-spinners"],
+    transpile: [
+      "epic-spinners", 
+      "vt-notifications",
+    ],
     html: {
       minify: {
         collapseWhitespace: true,
@@ -151,7 +148,7 @@ export default {
   },
   loading: false,
   publicRuntimeConfig: {
-    baseURL: process.env.BASE_URL || "http://localhost:80",
+    baseURL: process.env.BASE_URL || "https://parkir.dindingdigital.com",
     nodeEnv: process.env.NODE_ENV || "development",
   },
 };

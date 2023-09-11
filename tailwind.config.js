@@ -1,4 +1,6 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
+const colors = require("tailwindcss/colors")
+
 module.exports = {
   content: [
     "./components/**/*.{js,vue,ts}",
@@ -16,6 +18,16 @@ module.exports = {
   theme: {
     fontFamily: {
       sans: ["Source Sans Pro", "Kantumruy", ...defaultTheme.fontFamily.sans],
+    },
+    fontSize: {
+      xs: '0.2rem',
+      sm: '0.8rem',
+      base: '1rem',
+      xl: '1.25rem',
+      '2xl': '1.563rem',
+      '3xl': '1.953rem',
+      '4xl': '2.441rem',
+      '5xl': '3.052rem',
     },
     zIndex: {
       0: 0,
@@ -38,6 +50,8 @@ module.exports = {
       colors: (theme) => ({
         facebook: "#1778F2",
         tfd: "#ce3637",
+        "vtd-primary": colors.sky, // Light mode Datepicker color
+        "vtd-secondary": colors.gray, // Dark mode Datepicker color
       }),
     },
   },
