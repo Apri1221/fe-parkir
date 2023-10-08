@@ -1,23 +1,4 @@
-<p align="center">
-  <a href="https://www.youtube.com/c/TeachingForDevelopment" target="_blank" rel="noopener noreferrer"><img src="https://i.imgur.com/SZqGIpL.png" width="80" alt="TFD Logo" /></a>
-</p>
 
-<p align="center">A <a href="https://nuxtjs.org/" target="_blank" rel="noopener noreferrer">NuxtJs</a> boilerplate by <a href="https://www.youtube.com/c/TeachingForDevelopment" target="_blank" rel="noopener noreferrer">TFD</a> for building scalable API.</p>
-<p align="center">
-<img src="https://img.shields.io/badge/node.js-%2343853D.svg?style=for-the-badge&logo=node.js&logoColor=white" width="80">
-<img src="https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E" width="100">
-<img src="https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white" width="80">
-<img src="https://img.shields.io/badge/Nuxt-black?style=for-the-badge&logo=nuxt.js&logoColor=white" width="70">
-<img src="https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white" width="110">
-<img src="https://img.shields.io/badge/-jest-%23C21325?style=for-the-badge&logo=jest&logoColor=white" width="60">
-<br/>
-<a href="https://www.npmjs.com/package/nuxt" target="_blank"><img src="https://badgen.net/npm/v/nuxt" alt="Version" /></a>
-<a href="https://www.gnu.org/licenses/gpl-3.0" target="_blank"><img src="https://img.shields.io/badge/License-GPLv3-blue.svg" alt="Package License" /></a>
-<img alt="YouTube Channel Subscribers" src="https://img.shields.io/youtube/channel/subscribers/UCJHZ__wUxS9lgTZHMxpMJcQ?style=social">
-<br/>
-<img src="https://cdn.shortpixel.ai/client/q_glossy,ret_img,w_560/https://adscom.biz/wp-content/uploads/2017/02/ABA-logo-no-padding.png" width="80" alt="ABA" />
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Visa.svg/1200px-Visa.svg.png" width="55" alt="TFD Logo" />
-</p>
 
 <h1>Nuxt JS + Tailwind CSS + ESLint Boilerplate 
   <a
@@ -89,26 +70,3 @@ $ yarn start
 # generate static project
 $ yarn generate
 ```
-
-
-### With Docker
-
-Comming Soon!
-
-
-## Donation
-
-Kindly donate to the following bank account (Cambodia) if you want to support our works.
-
-<img src="https://cdn.shortpixel.ai/client/q_glossy,ret_img,w_560/https://adscom.biz/wp-content/uploads/2017/02/ABA-logo-no-padding.png" width="120" alt="TFD Logo" />
-
-#### KHEANG KIM ANG
-
-#### 001 821 043
-
-You can also donate with **Visa Direct**.
-
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Visa.svg/1200px-Visa.svg.png" width="120" alt="TFD Logo" />
-
-#### 4026 4503 2163 1102
-
