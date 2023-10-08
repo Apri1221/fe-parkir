@@ -53,6 +53,9 @@ module.exports = {
         "vtd-primary": colors.sky, // Light mode Datepicker color
         "vtd-secondary": colors.gray, // Dark mode Datepicker color
       }),
+      backgroundImage: {
+        'main': "url('https://source.unsplash.com/random/400×300/?city,night')"
+      },
     },
   },
   daisyui: {

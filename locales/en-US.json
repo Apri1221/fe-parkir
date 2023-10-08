@@ -75,5 +75,6 @@
   "updated_at": "Updated Date",
   "no_vehicle": "No. Vehicle",
   "end_date": "End Date",
-  "start_date": "Start Date"
+  "start_date": "Start Date",
+  "no_polisi": "Vehicle Number"
 }

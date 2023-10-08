@@ -25,7 +25,6 @@ export default {
       name: user.name,
       email: user.email,
     });
-    console.log(response);
     commit("UPDATE_LOGGED_USER", response, { root: true });
   },
   // eslint-disable-next-line no-unused-vars

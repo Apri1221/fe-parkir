@@ -6,7 +6,7 @@
 
     <div class="my-10"></div>
     
-    <div v-if="dataCategories" class="flex grid grid-cols-4 gap-4 mx-4 w-full xl:w-3/4">
+    <div v-if="dataCategories" class="flex grid grid-cols-5 gap-4 mx-4 w-4/5">
       <!-- tanggal -->
       <div class="mb-4">
         <label for="start_date" class="leading-7 text-sm text-gray-600">{{
@@ -41,13 +41,19 @@
           :options="selectPeople" variant="demo" 
           v-model="user"></t-select>
       </div>
+
+      <button type="submit" @click.prevent="download">
+        <ShadowButton text="download" color="bg-green-700" />
+      </button>
+      <div class="col-span-4"></div>
+      <input type="range" min="1" max="4" v-model="secret" className="range" step="1" />
       
     </div>
 
     <Table v-if="dataTranscations" 
       :total="dataTranscations.count" 
       :per-page="limit" 
-      :title="`${title} ${totalValue}`" 
+      :title="`${title} ${convertRupiah(dataTranscations.total_transaction)}`" 
       :list-columns="listColumns" 
       :data="dataTranscationsFlatten"
       :set-page="setPage" ></Table>
@@ -68,11 +74,11 @@ export default {
   components: { Table, CreateForm, ShadowButton },
   data() {
     return {
-      limit: 5,
+      secret: 4,
+      limit: 25,
       current: 1, // current page
-      anchor: '',
       title: "Total Transaction: ",
-      listColumns: ["time", "created_at", "total_amount", "type_vehicle", "total_people", "operator"],
+      listColumns: ["time", "created_at", "total_amount", "type_vehicle", "no_polisi", "total_people", "operator",],
       search: '',
       vehicle: '',
       user: '',
@@ -86,7 +92,6 @@ export default {
       limit: this.limit,
       search: '',
       operator: this.user,
-      anchor: this.anchor,
       vehicle: this.vehicle,
       start_date: this.start_date,
       end_date: this.end_date,
@@ -115,25 +120,31 @@ export default {
         data: e.created_at,
         type_vehicle: e.transaction_details.find(items => items.categories.name.toLowerCase() != 'orang' || items.categories.name.toLowerCase() != 'people') ? e.transaction_details.find(items => items.categories.name.toLowerCase() != 'orang' || items.categories.name.toLowerCase() != 'people').categories.name : null,
         total_people: e.transaction_details.find(items => items.categories.name.toLowerCase() === 'orang' || items.categories.name.toLowerCase() === 'people') ? e.transaction_details.find(items => items.categories.name.toLowerCase() === 'orang' || items.categories.name.toLowerCase() === 'people').quantity : null,
-        operator: e.operators.name
+        operator: e.operators.name,
+        no_polisi: e.transaction_details.find(items => items.categories.name.toLowerCase() != 'orang' || items.categories.name.toLowerCase() != 'people') ? e.transaction_details.find(items => items.categories.name.toLowerCase() != 'orang' || items.categories.name.toLowerCase() != 'people').notes : null,
       }))
     },
-    totalValue() {
-      let data = this.dataTranscations.data.map(e => e.total_amount);
-      if (data.length > 0) {
-        return toRupiah(data.reduce((acc, curr) => Number(acc) + Number(curr)), {formal: false});
-      }
-      return toRupiah(0, {formal: false});
-    }
   },
   watch: {
-    search: async function (val) {
+    secret: async function (val) {
       let data = {
         page: this.current,
         limit: this.limit,
         vehicle: this.vehicle,
         operator: this.user,
-        anchor: this.anchor,
+        search: this.search,
+        start_date: this.start_date,
+        end_date: this.end_date,
+        secret: val
+      }
+      await this.fetchTransactions(data);
+    },
+    search: async function (val) {
+      let data = {
+        page: this.current,
+        limit: this.limit,
+        category: this.vehicle,
+        operator: this.user,
         search: val,
         start_date: this.start_date,
         end_date: this.end_date,
@@ -141,13 +152,11 @@ export default {
       await this.fetchTransactions(data);
     },
     current: async function (val) {
-      console.log("ooo", val)
       let data = {
         page: val,
         limit: this.limit,
         category: this.vehicle,
         operator: this.user,
-        anchor: this.anchor,
         search: this.search,
         start_date: this.start_date,
         end_date: this.end_date,
@@ -160,7 +169,6 @@ export default {
         limit: this.limit,
         category: val,
         operator: this.user,
-        anchor: this.anchor,
         search: this.search,
         start_date: this.start_date,
         end_date: this.end_date,
@@ -171,8 +179,7 @@ export default {
       let data = {
         page: this.current,
         limit: this.limit,
-        vehicle: this.vehicle,
-        anchor: this.anchor,
+        category: this.vehicle,
         operator: val,
         search: this.search,
         start_date: this.start_date,
@@ -185,9 +192,8 @@ export default {
         let data = {
           page: this.current,
           limit: this.limit,
-          vehicle: this.vehicle,
+          category: this.vehicle,
           operator: this.user,
-          anchor: this.anchor,
           search: this.search,
           start_date: val,
           end_date: this.end_date
@@ -199,9 +205,8 @@ export default {
       let data = {
         page: this.current,
         limit: this.limit,
-        vehicle: this.vehicle,
+        category: this.vehicle,
         operator: this.user,
-        anchor: this.anchor,
         search: this.search,
         start_date: this.start_date,
         end_date: val
@@ -216,7 +221,6 @@ export default {
       fetchUsers: "users/fetchUsers",
     }),
     setPage(page) {
-      this.anchor = this.dataTranscationsFlatten[this.limit-1].id
       this.current = page;
     },
     setSearch: _.debounce(function (search) {
@@ -232,6 +236,29 @@ export default {
         search: ''
       }
       await this.fetchTransactions(data);
+    },
+    convertRupiah(value) {
+      return toRupiah(value, {formal: false});
+    },
+    async download() {
+      let data = {
+        category: this.vehicle,
+        operator: this.user,
+        start_date: this.start_date,
+        end_date: this.end_date,
+        secret: this.secret
+      }
+
+      await this.$axios.$post(`/transaction/export`, data, {responseType: 'blob'})
+        .then(response => {
+          const url = window.URL.createObjectURL(new Blob([response]));
+          const link = document.createElement('a');
+          link.href = url;
+          link.setAttribute('download', `transaction-${this.$moment().format("YYYY-MM-DD")}.xlsx`);
+          document.body.appendChild(link);
+          link.click();
+          link.remove();
+        }).catch(console.error);
     },
   }
 };

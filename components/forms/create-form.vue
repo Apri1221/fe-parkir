@@ -3,10 +3,7 @@
     <t-modal :click-to-close="true" :hide-close-button="true" name="create-form">
       <div class="container w-full mx-auto py-6 md:w-4/5 w-11/12 px-6">
         <div>
-          <img alt="profil" :src="'https://avatars.dicebear.com/api/male/' +
-            name +
-            '.svg?background=%230000ff'
-            " class="mx-auto object-cover rounded-full h-20 w-20" />
+          <img alt="profil" src="/bjs-logo.png" class="mx-auto object-cover rounded-full h-20 w-20" />
           <h2 class="mt-6 text-center text-4xl font-bold text-gray-700">
             New Data
           </h2>
@@ -33,7 +30,7 @@ import ShadowButton from "~/components/button/shadow-button";
 export default {
   name: "CreateForm",
   components: { ShadowButton },
-  props: ['onFinish', 'idSelected'],
+  props: ['onFinish', 'dataSelected'],
   data() {
     return {
       errorMsg: "",
@@ -43,6 +40,14 @@ export default {
       isSuccess: false,
     };
   },
+  watch: {
+    dataSelected: function(newVal, oldVal) {
+      if (newVal) {
+        this.name = newVal.name;
+        this.price = Number(newVal.price);
+      }
+    }
+  },
   methods: {
     clear() {
       this.$modal.hide("create-form");
@@ -50,8 +55,8 @@ export default {
     },
     async submit() {
       try {
-        if (this.idSelected) {
-          await this.$axios.$put(`/category/update/${this.idSelected}`, {
+        if (this.dataSelected) {
+          await this.$axios.$put(`/category/update/${this.dataSelected.id}`, {
             name: this.name,
             price: this.price,
           });
@@ -68,7 +73,6 @@ export default {
         );
         this.clear();
       } catch (error) {
-        console.log(error)
         this.$notify(
           { group: "error", title: "Uupps!", text: "Failed to store data." },
           3000

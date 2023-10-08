@@ -6,7 +6,6 @@ export const getters = {
     return state.auth.user.data;
   },
   stateCategories(state) {
-    console.log(state)
     return state.categories.categories;
   },
   stateUsers(state) {

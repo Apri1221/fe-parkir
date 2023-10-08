@@ -4,18 +4,18 @@
     <div class="modal modal-bottom sm:modal-middle">
       <form class="modal-box relative bg-gray-100" method="post" @submit.prevent="login">
         <label for="login-modal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-        <h2 class="text-gray-900 text-lg font-medium title-font mb-5">
+        <h2 class="text-gray-900 text-xl font-medium title-font mb-5">
           {{ $t("login") }}
         </h2>
         <div class="relative mb-4">
-          <label for="login-email" class="leading-7 text-sm text-gray-600">{{
+          <label for="login-email" class="leading-7 text-base text-gray-600">{{
             $t("email")
           }}</label>
           <input id="login-email" v-model="email" type="email" name="login-email" :required="true"
             autocomplete="login-email" class="tfd-input" />
         </div>
         <div class="relative mb-4">
-          <label for="login-password" class="leading-7 text-sm text-gray-600">{{
+          <label for="login-password" class="leading-7 text-base text-gray-600">{{
             $t("password")
           }}</label>
           <input id="login-password" v-model="password" type="password" name="login-password" :required="true"
@@ -65,7 +65,6 @@ export default {
         this.email = "";
         this.password = "";
       } catch (error) {
-        console.log(error)
         this.logging = false;
         this.$notify(
           { group: "error", title: "Uupps!", text: "Failed to login." },

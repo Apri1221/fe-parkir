@@ -17,7 +17,7 @@
     "
   >
     <slot></slot>
-    <span class="mx-2 text-sm font-normal"> {{ name }} </span>
+    <span class="mx-2 text-base font-normal"> {{ name }} </span>
   </NuxtLink>
 </template>
 <script>

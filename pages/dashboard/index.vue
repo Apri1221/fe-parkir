@@ -41,7 +41,7 @@
               <p class="text-gray-400 text-lg">Users</p>
             </div>
           </div>
-          <!-- <div class="w-1/6">
+          <div class="w-1/6">
             <div class="
                 shadow-lg
                 px-4
@@ -64,7 +64,7 @@
                 </g>
               </svg>
             </div>
-          </div> -->
+          </div>
         </div>
       </div>
     </div>
@@ -94,7 +94,7 @@
               ">
               {{ loggedInUser.id === user.id ? "logged user" : "user info" }}
             </p>
-            <div class="flex flex-row order-last">
+            <div v-show="false" class="flex flex-row order-last">
               <svg v-if="!editId && editId !== user.id" class="mr-2 lg:w-6 cursor-pointer"
                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" @click="setEditId(user.id)">
                 <title>Edit User</title>
@@ -149,10 +149,11 @@
           <div class="flex items-end space-x-2 my-6 justify-between">
             <a href="#" class="block relative">
               <!--              Generate random avatar on https://avatars.dicebear.com/docs/http-api-->
-              <img alt="profil" :src="'https://avatars.dicebear.com/api/male/' +
+              <!-- <img alt="profil" :src="'https://avatars.dicebear.com/api/male/' +
                 user.name +
                 '.svg?background=%230000ff'
-                " class="mx-auto object-cover rounded-full h-10 w-10" />
+                " class="mx-auto object-cover rounded-full h-10 w-10" /> -->
+                <img alt="profil" src="/bjs-logo.png" class="mx-auto object-cover rounded-full h-10 w-10" />
             </a>
             <p v-if="!editId || editId !== user.id" class="text-3xl text-black dark:text-white font-bold text-right">
               {{ user.name }}
@@ -257,7 +258,6 @@ export default {
     }),
     getCurrentHour() {
       let currentHour = this.$moment().format("HH");
-      console.log(currentHour)
       if (currentHour >= 3 && currentHour < 12) {
         return "Good Morning";
       } else if (currentHour >= 12 && currentHour < 15) {
@@ -292,7 +292,6 @@ export default {
         this.isSuccess = true;
       } catch (error) {
         this.ifError = true;
-        console.log(error.response.data.message);
         if (Array.isArray(error.response.data.message)) {
           this.errorMsg = error.response.data.message.join("<br />");
         } else {

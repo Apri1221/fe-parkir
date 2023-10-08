@@ -5,7 +5,7 @@
     </h1>
 
     <div class="my-10"></div>
-    <CreateForm :on-finish="onFinish" :id-selected="idSelected"/>
+    <CreateForm :on-finish="onFinish" :data-selected="dataSelected"/>
 
     <Table v-if="dataCategories" 
       :total.sync="dataCategories.count" 
@@ -37,7 +37,7 @@ export default {
       title: "Master Category",
       listColumns: ["name", "price", "created_at", "updated_at"],
       search: '',
-      idSelected: null
+      dataSelected: null
     };
   },
   async fetch() {
@@ -63,13 +63,12 @@ export default {
       await this.fetchCategories(data);
     },
     current: async function (val) {
-      console.log("ooo", val)
-      // let data = {
-      //   page: val,
-      //   limit: this.limit,
-      //   search: this.search
-      // }
-      // await this.fetchCategories(data);
+      let data = {
+        page: val,
+        limit: this.limit,
+        search: this.search
+      }
+      await this.fetchCategories(data);
     }
   },
   methods: {
@@ -86,7 +85,7 @@ export default {
       this.$modal.show("create-form");
     },
     setSelected(index) {
-      this.idSelected = this.dataCategories.data[index].id;
+      this.dataSelected = this.dataCategories.data[index];
       this.showAddNew()
     },
     async onFinish() {

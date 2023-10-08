@@ -25,7 +25,7 @@
         inline-block
         px-8
         py-3
-        text-sm
+        text-base
         font-bold
         tracking-widest
         uppercase

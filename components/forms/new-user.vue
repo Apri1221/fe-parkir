@@ -5,11 +5,7 @@
         <div>
           <img
             alt="profil"
-            :src="
-              'https://avatars.dicebear.com/api/male/' +
-              name +
-              '.svg?background=%230000ff'
-            "
+            src="/bjs-logo.png"
             class="mx-auto object-cover rounded-full h-20 w-20"
           />
           <h2 class="mt-6 text-center text-4xl font-bold text-gray-700">
@@ -34,24 +30,6 @@
             name="email"
             autocomplete="off"
             type="email"
-          />
-          <t-input
-            v-model="password"
-            classes="mt-4 border-gray-300 placeholder-gray-400 rounded-md"
-            :required="true"
-            placeholder="Password"
-            autocomplete="off"
-            name="password"
-            type="text"
-          />
-          <t-input
-            v-model="confirmPassword"
-            classes="mt-4 border-gray-300 placeholder-gray-400 rounded-md"
-            :required="true"
-            placeholder="Confirmed Password"
-            name="confirmedPassword"
-            autocomplete="off"
-            type="text"
           />
           <div class="mt-10 w-full flex justify-center text-white font-semibold text-sm uppercase rounded-md">
             <button type="submit">
@@ -102,15 +80,21 @@ export default {
     },
     async submit() {
       try {
-        await this.newUser();
+        await this.$axios.$post(`/attempt`, {
+          email: this.email,
+          name: this.name,
+        });
+        
+        this.$notify(
+          { group: "success", title: "Success", text: "Your account was registered! Check email." },
+          3000
+        );
         this.clear();
       } catch (error) {
-        this.ifError = true;
-        if (Array.isArray(error.response.data.message)) {
-          this.errorMsg = error.response.data.message.join("<br />");
-        } else {
-          this.errorMsg = error.response.data.message;
-        }
+        this.$notify(
+          { group: "error", title: "Uupps!", text: "Failed to register." },
+          3000
+        );
       }
     },
   },

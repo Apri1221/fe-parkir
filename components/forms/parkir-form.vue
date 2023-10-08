@@ -16,15 +16,15 @@
 
     <!-- Jam -->
     <div class="relative mb-4">
-      <label for="time" class="leading-7 text-sm text-gray-600">{{
+      <label for="time" class="leading-7 text-md text-gray-600">{{
         $t("time")
       }}</label>
-      <input id="time" v-model="time" type="time" step="0.1" name="time" :required="true" class="tfd-input" />
+      <input disabled id="time" v-model="time" type="time" step="0.1" name="time" class="tfd-input" />
     </div>
 
     <!-- vehicle -->
     <div class="relative mb-4">
-      <label for="people" class="leading-7 text-sm text-gray-600">{{
+      <label for="people" class="leading-7 text-base text-gray-600">{{
         $t("categories.vehicle")
       }}</label>
       <t-select placeholder="Select an option"
@@ -39,7 +39,7 @@
 
     <!-- plat no -->
     <div class="relative mb-4">
-      <label for="no_vehicle" class="leading-7 text-sm text-gray-600">{{
+      <label for="no_vehicle" class="leading-7 text-base text-gray-600">{{
         $t("no_vehicle")
       }}</label>
       <input id="no_vehicle" v-model="no_vehicle" type="text" name="no_vehicle" :required="true" class="tfd-input" />
@@ -50,7 +50,7 @@
 
     <!-- Orang -->
     <div class="relative mb-4">
-      <label for="people" class="leading-7 text-sm text-gray-600">{{
+      <label for="people" class="leading-7 text-base text-gray-600">{{
         $t("people")
       }}</label>
       <input id="people" v-model="people" type="number" name="people" :required="true" class="tfd-input" />
@@ -87,21 +87,23 @@ export default {
       errors: [],
       time: "",
       people: "",
-      vehicle: "",
-      no_vehicle: "",
+      vehicle: null,
+      no_vehicle: null,
       priceVehicle: 0,
       pricePeople: 0,
     };
   },
   async fetch() {
-    this.time = this.$moment().format("HH:mm:ss")
+    setInterval(() => {
+      this.time = this.$moment().format("HH:mm:ss")
+    }, 1000);
   },
   watch: {
     time: function (val) {
       console.log(val)
     },
     vehicle: function (val) {
-      if (this.select && val != "") {
+      if (this.select && val != null) {
         this.priceVehicle = Number(this.select.find(e => e.id === Number(val)).price);
       }
     },
@@ -120,8 +122,8 @@ export default {
     async clear() {
       this.time = this.$moment().format("HH:mm:ss");
       this.people = "";
-      this.no_vehicle = "";
-      this.vehicle = "";
+      this.no_vehicle = null;
+      this.vehicle = null;
       this.pricePeople = 0;
       this.priceVehicle = 0;
     },
@@ -167,7 +169,6 @@ export default {
         this.print(response);
         this.clear();
       } catch (error) {
-        console.log(error)
         this.$notify(
           { group: "error", title: "Uupps!", text: "Failed to submit." },
           3000

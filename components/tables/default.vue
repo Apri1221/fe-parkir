@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div class="w-full xl:w-4/5 px-5">
+        <div class="w-full px-5">
             
             <!-- header -->
             <div v-if="setSearch || setModal" class="grid grid-cols-3 gap-4 my-6">
@@ -33,7 +33,7 @@
                 <div class="px-6 py-4 border-0">
                     <div class="flex flex-wrap items-center">
                         <div class="relative w-full max-w-full flex-grow flex-1">
-                            <h3 class="font-bold text-lg text-blueGray-700">{{ title }}</h3>
+                            <h3 class="font-bold text-2xl text-blueGray-700">{{ title }}</h3>
                         </div>
                     </div>
                 </div>
@@ -41,23 +41,23 @@
                     <table class="items-center w-full bg-transparent border-collapse">
                         <thead>
                             <tr>
-                                <th class="px-6 justify-center align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-bold">No</th>
+                                <th class="px-6 justify-center align-middle border border-solid py-3 text-base uppercase border-l-0 border-r-0 whitespace-nowrap font-bold">No</th>
                                 <th v-for="(value, index) in listColumns"
-                                    class="px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-bold text-left">
+                                    class="px-6 align-middle border border-solid py-3 text-base uppercase border-l-0 border-r-0 whitespace-nowrap font-bold text-left">
                                     {{ $t(value) }}
                                 </th>
-                                <th v-if="deleteRow || editRow" class="px-6 justify-center align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-bold" colspan="2">action</th>
+                                <th v-if="deleteRow || editRow" class="px-6 justify-center align-middle border border-solid py-3 text-base uppercase border-l-0 border-r-0 whitespace-nowrap font-bold" colspan="2">action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-for="(data, x) in data">
-                                <td class="border-t-0 px-3 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
+                                <td class="border-t-0 px-3 align-middle border-l-0 border-r-0 text-base whitespace-nowrap p-4">
                                     <div class="flex justify-center mr-4"><span class="ml-3">
                                             {{ x+1 }}
                                         </span></div>
                                 </td>
                                 <td v-for="(col, y) in listColumns"
-                                    class="border-t-0 px-3 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
+                                    class="border-t-0 px-3 align-middle border-l-0 border-r-0 text-base whitespace-nowrap p-4">
                                     <div class="flex items-center">
                                         <span class="ml-3">
                                             {{ isDate(col) 
@@ -68,10 +68,10 @@
                                         </span>
                                     </div>
                                 </td>
-                                <td v-if="editRow" class="border-t-0 pl-3 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap py-4">
+                                <td v-if="editRow" class="border-t-0 pl-3 align-middle border-l-0 border-r-0 text-base whitespace-nowrap py-4">
                                     <t-button @click="() => editRow(x)">Edit</t-button>
                                 </td>
-                                <td v-if="deleteRow" class="border-t-0 pr-3 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap py-4">
+                                <td v-if="deleteRow" class="border-t-0 pr-3 align-middle border-l-0 border-r-0 text-base whitespace-nowrap py-4">
                                     <t-button @click="() => deleteRow(x)" variant="error">Delete</t-button>
                                 </td>
                             </tr>

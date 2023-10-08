@@ -38,6 +38,7 @@ export default {
   plugins: [
     { src: "~/plugins/tailwind-components.js" },
     { src: "~/plugins/vt-notifications.js" },
+    { src: "~/plugins/axios.js" },
   ],
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules

@@ -11,13 +11,13 @@
       mt-10
       md:mt-0
     " method="post" @submit.prevent="submit">
-    <h2 class="text-gray-900 text-lg font-medium title-font mb-5">
+    <h2 class="text-gray-900 text-xl font-medium title-font mb-5">
       {{ $t("sign_up") }}
     </h2>
 
     <!-- Name -->
     <div class="relative mb-4">
-      <label for="name" class="leading-7 text-sm text-gray-600">{{
+      <label for="name" class="leading-7 text-base text-gray-600">{{
         $t("name")
       }}</label>
       <input id="name" v-model="name" type="text" name="name" :required="true" class="tfd-input" />
@@ -25,7 +25,7 @@
     
     <!-- Email -->
     <div class="relative mb-4">
-      <label for="email" class="leading-7 text-sm text-gray-600">{{
+      <label for="email" class="leading-7 text-base text-gray-600">{{
         $t("email")
       }}</label>
       <input id="email" v-model="email" type="email" name="email" :required="true" class="tfd-input" />
@@ -55,7 +55,6 @@ export default {
     },
     async submit() {
       try {
-        console.log(this.$axios.defaults.baseURL)
         await this.$axios.$post(`/attempt`, {
           email: this.email,
           name: this.name,
@@ -67,7 +66,6 @@ export default {
         );
         this.clear();
       } catch (error) {
-        console.log(error)
         this.$notify(
           { group: "error", title: "Uupps!", text: "Failed to register." },
           3000

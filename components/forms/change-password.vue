@@ -104,7 +104,6 @@ export default {
       } catch (error) {
         this.ifError = true;
         if (Array.isArray(error.response.data.message)) {
-          console.log("true");
           this.errorMsg = error.response.data.message.join("<br />");
         } else {
           this.errorMsg = error.response.data.message;

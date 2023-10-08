@@ -75,5 +75,6 @@
   "updated_at": "Tanggal Diubah",
   "no_vehicle": "No. Kendaraan",
   "end_date": "Akhir Tanggal",
-  "start_date": "Awal Tanggal"
+  "start_date": "Awal Tanggal",
+  "no_polisi": "No. Polisi"
 }

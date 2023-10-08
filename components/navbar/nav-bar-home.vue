@@ -21,7 +21,7 @@
     </div>
     <div class="relative flex flex-col justify-end h-full px-3 md:w-full">
       <div class="relative p-1 flex items-center w-full space-x-4 justify-end">
-        <button class="
+        <!-- <button class="
             flex
             items-center
             text-gray-500
@@ -30,13 +30,11 @@
             capitalize
           " @click="showChange">
           change password
-        </button>
+        </button> -->
         <span class="w-1 h-8 rounded-lg bg-gray-200"> </span>
         <a href="#" class="block relative">
-          <img alt="profil" :src="'https://avatars.dicebear.com/api/male/' +
-            loggedInUser.name +
-            '.svg?background=%230000ff'
-            " class="mx-auto object-cover rounded-full h-10 w-10" />
+          <img alt="profil" src="/bjs-logo.png"
+            class="mx-auto object-cover rounded-full h-10 w-10" />
         </a>
         <div class="dropdown dropdown-bottom dropdown-end">
           <label tabindex="0" class="flex items-center text-gray-500 dark:text-white text-md">{{ loggedInUser.name
@@ -50,7 +48,7 @@
                     <path d="M30 16.5H11.74l8.38-8.38L18 6 6 18l12 12 2.12-2.12-8.38-8.38H30v-3z"></path>
                   </svg>
                 </span>
-                <span class="mx-4 text-sm font-normal"> Logout </span>
+                <span class="mx-4 text-base font-normal"> Logout </span>
               </span></li>
           </ul>
         </div>
